@@ -3,11 +3,11 @@ from parglare import Parser, Grammar
 # define the grammar
 grammar = r"""
 json: element;
-value: object | array | string | number | 'true' | 'false' | 'null';
+value: object | array | string | number | true | false | null;
 object: '{' ws '}' | '{' member '}';
-member: member ',' member {6} | EMPTY {7} | ws string ws ':' element;
+member: member ',' member {8} | EMPTY {9} | ws string ws ':' element;
 array: '[' ws ']' | '[' element ']';
-element: element ',' element {5} | EMPTY {8} | ws value ws;
+element: element ',' element {7} | EMPTY {9} | ws value ws;
 string: '"' character '"';
 character: character character | EMPTY | non_digit_hex | hex | reverse_solidus escape;
 escape: escape_character | hex_escape_character hex hex hex hex;
@@ -21,6 +21,9 @@ sign: EMPTY | '+' | '-';
 ws: EMPTY | tab ws | lf ws | cr ws | sp ws;
 
 terminals
+true: 'true';
+flase: 'false';
+null: 'null';
 tab: /[\u0009]/;
 lf: /[\u000a]/;
 cr: /[\u0009]/;
