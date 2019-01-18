@@ -1,8 +1,9 @@
 from parglare import Parser, Grammar
 
+# define the grammar
 grammar = r"""
 json: element;
-value: object | array | string | number | 'true' | 'false' | 'null';
+value: object | array | string | number | true | false | null;
 object: '{' ws '}' | '{' members '}';
 members: member | member ',' members;
 member: ws string ws ':' element;
@@ -24,6 +25,9 @@ sign: EMPTY | '+' | '-';
 ws: EMPTY | tab ws | lf ws | cr ws | sp ws;
 
 terminals
+true: 'true';
+false: 'false';
+null: 'null';
 tab: /[\u0009]/;
 lf: /[\u000a]/;
 cr: /[\u0009]/;
@@ -38,7 +42,8 @@ hex_lowercase: /[a-f]/;
 dot: /[.]/;
 """
 
-json = '{"colors": [{"color": "black", "category": "hue","type": "primary","code": {"rgba": [255,255,255,1],"hex": "#000"}},{"color": "white","category": "value","code": {"rgba": [0,0,0,1],"hex": "#FFF"}},{"color": "red","category": "hue","type": "primary","code": {"rgba": [255,0,0,1],"hex": "#FF0"}},{"color": "blue","category": "hue","type": "primary","code": {"rgba": [0,0,255,1],"hex": "#00F"}},{"color": "yellow","category": "hue","type": "primary","code": {"rgba": [255,255,0,1],"hex": "#FF0" }}, {"color": "green","category": "hue","type": "secondary","code": {"rgba": [0,255,0,1],"hex": "#0F0"}}]}'
+# JSON to test on
+json = '{"colors": [{"color": "black", "category": "hue", "type": "primary", "code": {"rgba": [255, 255, 255, 1], "hex": "#000"}}, {"color": "white", "category": "value", "code": {"rgba": [0, 0, 0, 1], "hex": "#FFF"}}, {"color": "red", "category": "hue", "type": "primary", "code": {"rgba": [255, 0, 0, 1], "hex": "#FF0"}}, {"color": "blue", "category": "hue", "type": "primary", "code": {"rgba": [0, 0, 255, 1], "hex": "#00F"}}, {"color": "yellow", "category": "hue", "type": "primary", "code": {"rgba": [255, 255, 0, 1], "hex": "#FF0"}}, {"color": "green", "category": "hue", "type": true, "code": {"rgba": [0, 255, 0, 1], "hex": "#0F0"}}]}'
 
 g = Grammar.from_string(grammar)
 
@@ -46,4 +51,4 @@ parser = Parser(g, debug=True, ws=None)
 
 result = parser.parse(json)
 
-print('Result:', result)
+print("Result = ", result)
