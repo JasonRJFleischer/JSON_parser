@@ -47,7 +47,11 @@ def combine_number(number):
     for i in range(len(number)):
         if number[i] != []:
             combined_number = combined_number + number[i]
-    return combined_number 
+    return combined_number
+
+def add_tag(tag_name, content):
+    tagged_content = ""
+    return tagged_content
 
 actions = {
     "json": lambda _, json: "<json>" + json[0] + "</json>",
